@@ -1,0 +1,12 @@
+.idea/
+.vscode/
+.history/
+.git/
+.DS_Store
+*.clpprj
+*.csprj
+*.bak
+wp-config.php
+composer.lock
+DB/GeoIP/GeoLite2-City.mmdb
+DB/SxGeo/SxGeoCity.dat
