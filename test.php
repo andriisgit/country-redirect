@@ -1,8 +1,8 @@
 <?php
 $ip = $_SERVER['REMOTE_ADDR'];
-//$ip = '46.133.64.2'; // Olha mobile
-$ip = '85.209.44.123'; // Ira work computer
-//$ip = '178.133.73.146'; // Ira work mobile
+//$ip = '46.133.64.2'; // O mobile
+$ip = '85.209.44.123'; // I work computer
+//$ip = '178.133.73.146'; // I work mobile
 echo 'IP: ' . $ip;
 echo '<br/><hr/><br/>';
 
@@ -11,6 +11,7 @@ if (file_exists('DB/SxGeo/SxGeo.php')) {
 	include_once('DB/SxGeo/SxGeo.php');
 	$SxGeo = new SxGeo('DB/SxGeo/SxGeo.dat');
 	print_r($SxGeo->getCountry($ip));
+	$a = $SxGeo->get_num($ip);
 }
 
 echo '<br/><hr/><br/>';

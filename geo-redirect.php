@@ -9,10 +9,27 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/**
+/* ------------------------------------------------------------------------ *
  * Activate the plugin
- */
+ * ------------------------------------------------------------------------ */
 function gr_activation() {
+
+	if ( false == get_option( 'gr_engine_sxgeo' ) ) {
+		add_option( 'gr_engine_sxgeo', 1, '', 'no' );
+	}
+
+	if ( false == get_option( 'gr_engine_geoip' ) ) {
+		add_option( 'gr_engine_geoip', 1, '', 'no' );
+	}
+
+	if ( false == get_option( 'gr_engine_ipapi' ) ) {
+		add_option( 'gr_engine_ipapi', 1, '', 'no' );
+	}
+
+	if ( false == get_option( 'gr_engine_geoip2' ) ) {
+		add_option( 'gr_engine_geoip2', 1, '', 'no' );
+	}
+
 
 	set_transient( 'gr-activation-notice', true, 5 );
 }
@@ -20,18 +37,18 @@ function gr_activation() {
 register_activation_hook( __FILE__, 'gr_activation' );
 
 
-/**
+/* ------------------------------------------------------------------------ *
  * Deactivate the plugin
- */
+ * ------------------------------------------------------------------------ */
 function gr_deactivation() {
 
 }
 
 register_deactivation_hook( __FILE__, 'gr_deactivation' );
 
-/**
+/* ------------------------------------------------------------------------ *
  * Show notice after plugin activation
- */
+ * ------------------------------------------------------------------------ */
 function gr_activation_notice() {
 	if ( get_transient( 'gr-activation-notice' ) ) {
 		?>
@@ -47,32 +64,10 @@ function gr_activation_notice() {
 add_action( 'admin_notices', 'gr_activation_notice' );
 
 
-function gr_restrict_admin() {
-	if ( ! current_user_can( 'manage_options' ) && '/wp-admin/admin-ajax.php' != $_SERVER['PHP_SELF'] ) {
-		wp_redirect( home_url() . '/account' );
-	}
-}
-
-add_action( 'admin_init', 'gr_restrict_admin' );
-
-
-/**
+/* ------------------------------------------------------------------------ *
  * Connect JS and CSS
- */
+ * ------------------------------------------------------------------------ */
 function gr_enqueue() {
-
-	if ( ! current_user_can( 'manage_options' ) && '/wp-admin/admin-ajax.php' != $_SERVER['PHP_SELF'] ) {
-		/*
-				wp_enqueue_script('ue_upd_profile_page_script', plugin_dir_url( __FILE__ ) . 'js/profile_page.js', array('jquery'), null, true);
-
-				wp_enqueue_style(
-					'ue_css_customization',
-					plugin_dir_url(__FILE__) . 'css/css.css',
-					array('buttons', 'dashicons', 'mediaelement', 'wp-mediaelement', 'media-views', 'imgareaselect'),
-					null
-				);
-		*/
-	}
 
 }
 
@@ -92,32 +87,31 @@ function gr_admin_page() {
     <!-- Create a header in the default WordPress 'wrap' container -->
     <div class="wrap">
 
-        <h2>Sandbox Theme Options</h2>
+        <h2>Geo Redirect Options</h2>
 
         <!-- Make a call to the WordPress function for rendering errors when settings are saved. -->
 		<?php settings_errors(); ?>
 
 		<?php
-		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'display_options';
+		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'engine_options';
 		?>
 
         <h2 class="nav-tab-wrapper">
-            <a href="?page=geo-redirect-options&tab=display_options"
-               class="nav-tab <?php echo $active_tab == 'display_options' ? 'nav-tab-active' : ''; ?>">Engine
+            <a href="?page=geo-redirect-options&tab=engine_options"
+               class="nav-tab <?php echo $active_tab == 'engine_options' ? 'nav-tab-active' : ''; ?>">Engine
                 Settings</a>
-            <a href="?page=geo-redirect-options&tab=social_options"
-               class="nav-tab <?php echo $active_tab == 'social_options' ? 'nav-tab-active' : ''; ?>">Redirect
+            <a href="?page=geo-redirect-options&tab=redirect_options"
+               class="nav-tab <?php echo $active_tab == 'redirect_options' ? 'nav-tab-active' : ''; ?>">Redirect
                 Settings</a>
         </h2>
 
-        <!-- Create the form that will be used to render our options -->
         <form method="post" action="options.php">
 			<?php
-			if ( $active_tab == 'display_options' ) {
+			if ( $active_tab == 'engine_options' ) {
 				settings_fields( 'engine' );
 				do_settings_sections( 'engine' );
 			}
-			if ( $active_tab == 'social_options' ) {
+			if ( $active_tab == 'redirect_options' ) {
 				settings_fields( 'redirect' );
 				do_settings_sections( 'redirect' );
 			}
@@ -128,42 +122,34 @@ function gr_admin_page() {
 	<?php
 }
 
-function sandbox_initialize_theme_options() {
+function gr_initialize_options() {
 
-	$lpath = plugin_dir_path( __FILE__ ) . 'DB' . DIRECTORY_SEPARATOR . 'SxGeo' . DIRECTORY_SEPARATOR . 'SxGeo.php';
-	$dpath = plugin_dir_path( __FILE__ ) . 'DB' . DIRECTORY_SEPARATOR . 'SxGeo' . DIRECTORY_SEPARATOR . 'SxGeo.dat';
+	$path = plugin_dir_path( __FILE__ ) . 'DB' . DIRECTORY_SEPARATOR . 'SxGeo' . DIRECTORY_SEPARATOR . 'SxGeo';
 
-	if ( ! file_exists( $lpath ) || ! file_exists( $dpath ) ) {
-		echo '<p><strong>Error</strong> needed data did not found.</p>';
-		echo '<p>Expected library path is ' . $lpath . '</p>';
-		echo '<p>Expected DB path is ' . $dpath . '</p>';
-		wp_die();
-	}
-
-	include_once( $lpath );
-	$SxGeo = new SxGeo( $dpath );
+	include_once( $path . '.php' );
+	$SxGeo = new SxGeo( $path . '.dat' );
 
 
 	$engine_settings = [
 		[
-			'id'       => 'gr_engine_sxgeo',
-			'title'    => 'SxGeo',
-			'label'    => 'Use SxGeo library to determine user\'s country. For additional info about the library, check https://sypexgeo.net'
+			'id'    => 'gr_engine_sxgeo',
+			'title' => 'SxGeo (local)',
+			'label' => 'Use SxGeo library to determine user\'s country. For additional info about the library, check https://sypexgeo.net'
 		],
 		[
-			'id'       => 'gr_engine_geoip',
-			'title'    => 'GEOIP DB',
-			'label'    => 'Use GEOIP DB API to determine user\'s country. For additional info about the library, check https://geoip-db.com'
+			'id'    => 'gr_engine_geoip2',
+			'title' => 'GeoIp2 (local)',
+			'label' => 'Use GeoIP2 library to determine user\'s country. For additional info about the library, check https://dev.maxmind.com/geoip/'
 		],
 		[
-			'id'       => 'gr_engine_ipapi',
-			'title'    => 'ip-api',
-			'label'    => 'Use ip-api API to determine user\'s country. For additional info about the library, check http://ip-api.com'
+			'id'    => 'gr_engine_geoip',
+			'title' => 'GEOIP DB (remote)',
+			'label' => 'Use GEOIP DB API to determine user\'s country. For additional info about the library, check https://geoip-db.com'
 		],
 		[
-			'id'       => 'gr_engine_geoip2',
-			'title'    => 'GeoIp2',
-			'label'    => 'Use GeoIP2 library to determine user\'s country. For additional info about the library, check https://dev.maxmind.com/geoip/'
+			'id'    => 'gr_engine_ipapi',
+			'title' => 'ip-api (remote)',
+			'label' => 'Use ip-api API to determine user\'s country. For additional info about the library, check http://ip-api.com'
 		]
 	];
 
@@ -193,21 +179,21 @@ function sandbox_initialize_theme_options() {
 	foreach ( $SxGeo->id2iso as $code ) {
 		if ( ! empty( $code ) ) {
 			add_settings_field( 'gr_redirect_' . $code, $code, 'gr_toggle_redirect', 'redirect', 'gr_redirect_settings', [ $code ] );
-			register_setting( 'gr_redirect_settings', 'gr_redirect_' . $code );
+			register_setting( 'redirect', 'gr_redirect_' . $code );
 		}
 	}
 
 }
 
-add_action( 'admin_init', 'sandbox_initialize_theme_options' );
+add_action( 'admin_init', 'gr_initialize_options' );
 
 /* ------------------------------------------------------------------------ *
  * Sections Callbacks
  * ------------------------------------------------------------------------ */
 
 function gr_engine_settings_callback() {
-	echo '<p>Select DB and/or API you want to use to determine visitor\s country.</p>';
-	echo '<p>If no determine endgine wil selected, all Redirect Settings will be skipped.</p>';
+	echo '<p>Select DB and/or API you want to use to determine visitor\'s country.</p>';
+	echo '<p>If no determine engine will be selected below, all Redirect Settings will be skipped.</p>';
 }
 
 function gr_redirect_settings_callback() {
@@ -215,10 +201,10 @@ function gr_redirect_settings_callback() {
 	echo '<p>To see complete list of codes, check Wikipedia page: https://en.wikipedia.org/wiki/ISO_3166-1</p>';
 }
 
+
 /* ------------------------------------------------------------------------ *
  * Field Callbacks
  * ------------------------------------------------------------------------ */
-
 
 function gr_toggle_engine( $args ) {
 
@@ -231,17 +217,74 @@ function gr_toggle_engine( $args ) {
 
 function gr_toggle_redirect( $args ) {
 
-	$html = '<input type="text" id="' . $args[0] . '" name="country[' . $args[0] . ']" value="' . get_option( $args[0] ) . '" class="regular-text code"/>';
-	$html .= '<label for="' . $args[0] . '"> ' . $args[0] . '</label>';
+	$option_name = 'gr_redirect_' . $args[0];
+
+	$html = '<input type="text" id="' . $option_name . '" name="' . $option_name . '" value="' . get_option( $option_name ) . '" class="regular-text code"/>';
+	$html .= '<label for="' . $option_name . '"> Put here redirection URL for ' . $args[0] . '</label>';
 
 	echo $html;
 
 }
 
 
-add_action( 'template_redirect', function() {
-	if ( !is_user_logged_in() ) {
-		wp_redirect( 'http://195.64.154.174/BIIR5/', 301 );
-		exit;
+/* ------------------------------------------------------------------------ *
+ * Redirect
+ * ------------------------------------------------------------------------ */
+add_action( 'template_redirect', function () {
+	if ( ! is_user_logged_in() ) {
+		$ip = $_SERVER['REMOTE_ADDR'];
+		//$ip = '46.133.64.2'; // O mobile
+		$ip = '85.209.44.123'; // I work computer
+        //$ip = '178.133.73.146'; // I work mobile
+		$redirect = null;
+
+		// Checking country using local SxGeo
+		if ( get_option( 'gr_engine_sxgeo' ) ) {
+			include_once 'engine' . DIRECTORY_SEPARATOR . 'sxgeo.php';
+			$country = sxgeo( $ip );
+            if ($country) {
+	            $url = get_option( 'gr_redirect_' . $country );
+	            if ( wp_http_validate_url( $url ) ) {
+		            $redirect = $url;
+	            }
+            }
+		}
+
+		// Checking country using local GeoIp2
+		if ( !is_null($redirect) && get_option( 'gr_engine_geoip2' ) ) {
+			include_once 'engine' . DIRECTORY_SEPARATOR . 'geoip2.php';
+			$country = geoip2( $ip );
+			if ($country) {
+				$url = get_option( 'gr_redirect_' . $country );
+				if ( wp_http_validate_url( $url ) ) {
+					$redirect = $url;
+				}
+			}
+		}
+
+		// Checking country using remote GEOIP DB
+
+		// Checking country using remote ip-api
+
+		if ( !is_null($redirect) ) {
+			wp_redirect( $redirect );
+			exit;
+		}
 	}
 } );
+
+function in_country_code( $country ) {
+	$path = plugin_dir_path( __FILE__ ) . 'DB' . DIRECTORY_SEPARATOR . 'SxGeo' . DIRECTORY_SEPARATOR . 'SxGeo';
+	include_once( $path . '.php' );
+	$SxGeo = new SxGeo( $path . '.dat' );
+	$countries = $SxGeo->id2iso;
+
+	if ($countries[0] == '')
+		array_shift($countries);
+
+    if ( in_array( $country, $countries ) )
+		return true;
+
+	return false;
+
+}
