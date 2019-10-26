@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: grl10n\n"
+"POT-Creation-Date: 2019-10-26 21:46+0300\n"
+"PO-Revision-Date: 2019-10-26 22:17+0300\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: uk_UA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.4\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && "
+"(n%100<12 || n%100>14) ? 1 : 2);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: vendor\n"
+"X-Poedit-SearchPathExcluded-1: DB\n"
+
+#: geo-redirect.php:57
+msgid "activated"
+msgstr "активовано"
+
+#: geo-redirect.php:58
+msgid "You can set redirection"
+msgstr "Щоб настроїти перенаправлення, перейдіть"
+
+#: geo-redirect.php:58 geo-redirect.php:100
+msgid "Settings"
+msgstr "Налаштування"
+
+#: geo-redirect.php:111 geo-redirect.php:171
+msgid "Engine Settings"
+msgstr "Налаштування визначення"
+
+#: geo-redirect.php:113 geo-redirect.php:178
+msgid "Redirect Settings"
+msgstr "Налаштування перенаправлення"
+
+#: geo-redirect.php:137
+msgid "Use "
+msgstr "Використовувати "
+
+#: geo-redirect.php:138
+msgid ""
+" library to determine visitor's country. For additional info about the library, "
+"check "
+msgstr ""
+" бібліотеку для визначення країни відвідувача. Інформацію про бібліотеку можна "
+"знайти на "
+
+#: geo-redirect.php:139
+msgid " API to determine visitor's country. For additional info about the API, check "
+msgstr " API для визначення країни відвідувача. Інформацію про API можна знайти на "
+
+#: geo-redirect.php:207
+msgid "Select DB and/or API you want to use to determine visitor's country"
+msgstr ""
+"Оберіть базу визначень та/або API які Ви бажаєте використовувати для визначення "
+"країни відвідувача"
+
+#: geo-redirect.php:208
+msgid ""
+"If no determine engine will be selected below, all Redirect Settings will be skipped"
+msgstr ""
+"Якщо жодного визначення на цій сторінці не вибрано, всі налаштування "
+"перенаправлення будуть ігноровані"
+
+#: geo-redirect.php:212
+msgid ""
+"Assign desired redirection to country code. Just enter the full URL into textbox"
+msgstr ""
+"Співставте бажане перенаправлення з кодом країни. Ведіть повний URL в відповідне "
+"тектсове поле"
+
+#: geo-redirect.php:213
+msgid "To see complete list of codes, check Wikipedia page"
+msgstr "Щоб дізнатися перелік кодів країн, відвідайте трорінку Wikipedia"
+
+#: geo-redirect.php:242
+msgid "Put here redirection URL for "
+msgstr "Введіть URL перенаправлення для "
+
+#. Description of the plugin
+msgid "Simple to use plugin for redirection depending visitor's country"
+msgstr ""
+"Простий у використанні плагін для перенаправлення відвідувачів в залежності від "
+"країни з якої зайшов відвідувач"

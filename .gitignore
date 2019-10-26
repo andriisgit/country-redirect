@@ -8,5 +8,6 @@
 *.bak
 wp-config.php
 composer.lock
+test.php
 DB/GeoIP/GeoLite2-City.mmdb
 DB/SxGeo/SxGeoCity.dat
