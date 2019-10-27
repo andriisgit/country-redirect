@@ -1,6 +1,6 @@
 <?php
 /* ------------------------------------------------------------------------ *
- * Determining country library for Geo Redirect using local SxGeo
+ * Determining country library for Country Redirect using local SxGeo
  * ------------------------------------------------------------------------ */
 
 /**

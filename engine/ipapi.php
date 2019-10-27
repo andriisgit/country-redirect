@@ -1,6 +1,6 @@
 <?php
 /* ------------------------------------------------------------------------ *
- * Determining country library for Geo Redirect using remote ip-api
+ * Determining country library for Country Redirect using remote ip-api
  * ------------------------------------------------------------------------ */
 
 function ipapi( $ip ) {

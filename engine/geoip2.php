@@ -1,6 +1,6 @@
 <?php
 /* ------------------------------------------------------------------------ *
- * Determining country library for Geo Redirect using local GeoIp2
+ * Determining country library for Country Redirect using local GeoIp2
  * ------------------------------------------------------------------------ */
 
 require_once plugin_dir_path( dirname( __FILE__ ) ) . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';

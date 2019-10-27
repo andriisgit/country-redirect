@@ -97,7 +97,7 @@ function cr_admin_page() {
 
     <div class="wrap">
 
-        <h2>Geo Redirect <?php _e( 'Settings', 'grl10n' ) ?></h2>
+        <h2>Country Redirect <?php _e( 'Settings', 'grl10n' ) ?></h2>
 
 		<?php
 		// Make a call to the WordPress function for rendering errors when settings are saved.

@@ -1,6 +1,6 @@
 <?php
 /* ------------------------------------------------------------------------ *
- * Determining country library for Geo Redirect using remote GEOIP DB API
+ * Determining country library for Country Redirect using remote GEOIP DB API
  * ------------------------------------------------------------------------ */
 
 function geoip( $ip ) {
