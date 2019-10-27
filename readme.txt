@@ -1,6 +1,6 @@
-=== geo-redirect  ===
+=== country-redirect  ===
 Contributors: web8moon
-Tags: redirect, geo, ip
+Tags: redirect, country, ip, geo, redirect by country, redirect by geo, redirect by ip
 Requires at least: 4.7
 Tested up to: 5.2.4
 Stable tag: 1.0
@@ -8,7 +8,7 @@ Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Simple to use Wordpress plugin for redirection depending visitor's country
+Simple to use free WordPress plugin for redirection depending visitor's country
 
 == Description ==
 
@@ -16,9 +16,9 @@ Simple to use Wordpress plugin for redirection depending visitor's country
 The plugin very useful for companies (such as Bosch, Biir, Siemens) and blogs who have different web-sites for not logged in visitors from different countries.
 
 ####What is plugin exactly do
-The plugin creates Settings page Geo Redirect in the Wordpress's admin section where it is possible to point all possible redirects for any country in the world.
+The plugin creates Settings page Country Redirect in the WordPress's admin section where it is possible to point redirect for any country in the world.
 
-When unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the Wordpress default `302` status.
+When unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the WordPress default `302` status.
 
 ####Has the country determination reliable
 Both desktop and mobile visitors should be determined correctly using four determining engine based on visitor's IP.
@@ -41,9 +41,9 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 The plugin very useful for companies (such as Bosch, Biir, Siemens) and blogs who have different web-sites for not logged in visitors from different countries.
 
 = What is plugin exactly do =
-The plugin creates Settings page Geo Redirect in the Wordpress's admin section where it is possible to point all possible redirects for any country in the world.
+The plugin creates Settings page Country Redirect in the WordPress's admin section where it is possible to point redirect for any country in the world.
 
-When unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the Wordpress default `302` status.
+When unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the WordPress default `302` status.
 
 = Has the country determination reliable =
 Both desktop and mobile visitors should be determined correctly using four determining engine based on visitor's IP.

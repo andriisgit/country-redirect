@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: geo-redirect
-Plugin URI: https://github.com/andriisgit/geo-redirect
-Description: Simple to use plugin for redirection depending visitor\'s country
+Plugin Name: country-redirect
+Plugin URI: https://github.com/andriisgit/country-redirect
+Description: Simple to use free plugin for redirection depending visitor's country
 Version: 1.0
 Text Domain: grl10n
 Domain Path: /lang/
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /* ------------------------------------------------------------------------ *
  * Activate the plugin
  * ------------------------------------------------------------------------ */
-function gr_activation() {
+function cr_activation() {
 
 	if ( false == get_option( 'gr_engine_sxgeo' ) ) {
 		add_option( 'gr_engine_sxgeo', 1, '', 'no' );
@@ -32,38 +32,38 @@ function gr_activation() {
 		add_option( 'gr_engine_geoip2', 1, '', 'no' );
 	}
 
-	set_transient( 'gr-activation-notice', true, 5 );
+	set_transient( 'cr-activation-notice', true, 5 );
 }
 
-register_activation_hook( __FILE__, 'gr_activation' );
+register_activation_hook( __FILE__, 'cr_activation' );
 
 
 /* ------------------------------------------------------------------------ *
  * Deactivate the plugin
  * ------------------------------------------------------------------------ */
-function gr_deactivation() {
+function cr_deactivation() {
 	// empty
 }
 
-register_deactivation_hook( __FILE__, 'gr_deactivation' );
+register_deactivation_hook( __FILE__, 'cr_deactivation' );
 
 /* ------------------------------------------------------------------------ *
  * Show notice after plugin activation
  * ------------------------------------------------------------------------ */
-function gr_activation_notice() {
-	if ( get_transient( 'gr-activation-notice' ) ) {
+function cr_activation_notice() {
+	if ( get_transient( 'cr-activation-notice' ) ) {
 		?>
         <div class="updated notice is-dismissible">
-            <p>Geo Redirect <?php _e( 'activated', 'grl10n' ) ?>.</p>
-            <p><?php _e( 'You can set redirection', 'grl10n' ) ?> <a href="options-general.php?page=geo-redirect-options"><?php _e( 'Settings', 'grl10n' ) ?> - Geo Redirect</a></p>
+            <p>Country Redirect <?php _e( 'activated', 'grl10n' ) ?>.</p>
+            <p><?php _e( 'You can set redirection', 'grl10n' ) ?> <a href="options-general.php?page=country-redirect-options"><?php _e( 'Settings', 'grl10n' ) ?> - Country Redirect</a></p>
         </div>
 		<?php
 		/* Delete transient, only display this notice once. */
-		delete_transient( 'gr-activation-notice' );
+		delete_transient( 'cr-activation-notice' );
 	}
 }
 
-add_action( 'admin_notices', 'gr_activation_notice' );
+add_action( 'admin_notices', 'cr_activation_notice' );
 
 
 /* ------------------------------------------------------------------------ *
@@ -77,18 +77,18 @@ add_action( 'plugins_loaded', function () {
 /* ------------------------------------------------------------------------ *
  * Connect JS and CSS
  * ------------------------------------------------------------------------ */
-function gr_enqueue() {
+function cr_enqueue() {
 	// empty
 }
 
-add_action( 'wp_enqueue_scripts', 'gr_enqueue' );
+add_action( 'wp_enqueue_scripts', 'cr_enqueue' );
 
 
 add_action( 'admin_menu', function () {
-	add_options_page( 'Geo Redirect', 'Geo Redirect', 'manage_options', 'geo-redirect-options', 'gr_admin_page' );
+	add_options_page( 'Country Redirect', 'Country Redirect', 'manage_options', 'country-redirect-options', 'cr_admin_page' );
 } );
 
-function gr_admin_page() {
+function cr_admin_page() {
 	// check user capabilities
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
@@ -107,9 +107,9 @@ function gr_admin_page() {
 		?>
 
         <h2 class="nav-tab-wrapper">
-            <a href="?page=geo-redirect-options&tab=engine_options"
+            <a href="?page=country-redirect-options&tab=engine_options"
                class="nav-tab <?php echo $active_tab == 'engine_options' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Engine Settings', 'grl10n' ) ?></a>
-            <a href="?page=geo-redirect-options&tab=redirect_options"
+            <a href="?page=country-redirect-options&tab=redirect_options"
                class="nav-tab <?php echo $active_tab == 'redirect_options' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Redirect Settings', 'grl10n' ) ?></a>
         </h2>
 
@@ -130,7 +130,7 @@ function gr_admin_page() {
 	<?php
 }
 
-function gr_initialize_options() {
+function cr_initialize_options() {
 
 	$path = plugin_dir_path( __FILE__ ) . 'DB' . DIRECTORY_SEPARATOR . 'SxGeo' . DIRECTORY_SEPARATOR . 'SxGeo';
 
@@ -167,21 +167,21 @@ function gr_initialize_options() {
 
 
 	add_settings_section(
-		'gr_engine_settings',
+		'cr_engine_settings',
 		__( 'Engine Settings', 'grl10n' ),
-		'gr_engine_settings_callback',
+		'cr_engine_settings_callback',
 		'engine'
 	);
 
 	add_settings_section(
-		'gr_redirect_settings',
+		'cr_redirect_settings',
 		__( 'Redirect Settings', 'grl10n' ),
-		'gr_redirect_settings_callback',
+		'cr_redirect_settings_callback',
 		'redirect'
 	);
 
 	foreach ( $engine_settings as $setting ) {
-		add_settings_field( $setting['id'], $setting['title'], 'gr_toggle_engine', 'engine', 'gr_engine_settings', [
+		add_settings_field( $setting['id'], $setting['title'], 'cr_toggle_engine', 'engine', 'cr_engine_settings', [
 			$setting['id'],
 			$setting['label']
 		] );
@@ -190,25 +190,25 @@ function gr_initialize_options() {
 
 	foreach ( $SxGeo->id2iso as $code ) {
 		if ( ! empty( $code ) ) {
-			add_settings_field( 'gr_redirect_' . $code, $code, 'gr_toggle_redirect', 'redirect', 'gr_redirect_settings', [ $code ] );
-			register_setting( 'redirect', 'gr_redirect_' . $code, 'gr_validate_url' );
+			add_settings_field( 'gr_redirect_' . $code, $code, 'cr_toggle_redirect', 'redirect', 'cr_redirect_settings', [ $code ] );
+			register_setting( 'redirect', 'gr_redirect_' . $code, 'cr_validate_url' );
 		}
 	}
 
 }
 
-add_action( 'admin_init', 'gr_initialize_options' );
+add_action( 'admin_init', 'cr_initialize_options' );
 
 /* ------------------------------------------------------------------------ *
  * Sections Callbacks
  * ------------------------------------------------------------------------ */
 
-function gr_engine_settings_callback() {
+function cr_engine_settings_callback() {
 	echo '<p>' . __( 'Select DB and/or API you want to use to determine visitor\'s country', 'grl10n' ) . '.</p>';
 	echo '<p>' . __( 'If no determine engine will be selected below, all Redirect Settings will be skipped', 'grl10n' ) . '.</p>';
 }
 
-function gr_redirect_settings_callback() {
+function cr_redirect_settings_callback() {
 	echo '<p>' . __( 'Assign desired redirection to country code. Just enter the full URL into textbox', 'grl10n' ) . '.</p>';
 	echo '<p>' . __( 'To see complete list of codes, check Wikipedia page', 'grl10n' ) . ': https://en.wikipedia.org/wiki/ISO_3166-1</p>';
 }
@@ -216,17 +216,17 @@ function gr_redirect_settings_callback() {
 /* ------------------------------------------------------------------------ *
  * Validating URL
  * ------------------------------------------------------------------------ */
-function gr_validate_url( $input ) {
+function cr_validate_url( $input ) {
 	$output = esc_url_raw( $input );
 
-	return apply_filters( 'gr_validate_url', $output, $input );
+	return apply_filters( 'cr_validate_url', $output, $input );
 }
 
 /* ------------------------------------------------------------------------ *
  * Field Callbacks
  * ------------------------------------------------------------------------ */
 
-function gr_toggle_engine( $args ) {
+function cr_toggle_engine( $args ) {
 
 	$html = '<input type="checkbox" id="' . $args[0] . '" name="' . $args[0] . '" value="1" ' . checked( 1, get_option( $args[0] ), false ) . '/>';
 	$html .= '<label for="' . $args[0] . '"> ' . $args[1] . '</label>';
@@ -234,7 +234,7 @@ function gr_toggle_engine( $args ) {
 	echo $html;
 }
 
-function gr_toggle_redirect( $args ) {
+function cr_toggle_redirect( $args ) {
 
 	$option_name = 'gr_redirect_' . $args[0];
 
@@ -251,7 +251,7 @@ function gr_toggle_redirect( $args ) {
 add_action( 'template_redirect', function () {
 	// redirect only NOT logged in users
     if ( ! is_user_logged_in() ) {
-		$ip       = $_SERVER['REMOTE_ADDR'];
+		$ip = $_SERVER['REMOTE_ADDR'];
 		$redirect = null;
 
 		// Checking country using local SxGeo
