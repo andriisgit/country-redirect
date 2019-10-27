@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: geo-redirect
-Plugin URI: https://github.com/andriisgit/geo-redirect
-Description: Simple to use plugin for redirection depending visitor\'s country
+Plugin Name: country-redirect
+Plugin URI: https://github.com/andriisgit/country-redirect
+Description: Simple to use free plugin for redirection depending visitor's country
 Version: 1.0
 Text Domain: grl10n
 Domain Path: /lang/
@@ -97,7 +97,7 @@ function gr_admin_page() {
 
     <div class="wrap">
 
-        <h2>Geo Redirect <?php _e( 'Settings', 'grl10n' ) ?></h2>
+        <h2>Country Redirect <?php _e( 'Settings', 'grl10n' ) ?></h2>
 
 		<?php
 		// Make a call to the WordPress function for rendering errors when settings are saved.
