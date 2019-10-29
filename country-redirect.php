@@ -2,7 +2,7 @@
 /*
 Plugin Name: country-redirect
 Plugin URI: https://github.com/andriisgit/country-redirect
-Description: Simple to use free plugin for redirection depending visitor's country
+Description: Simple to use free and safety plugin for redirection depending visitor's country
 Version: 1.0
 Text Domain: grl10n
 Domain Path: /lang/
