@@ -12,41 +12,37 @@ Simple to use free WordPress plugin for redirection depending visitor's country
 
 == Description ==
 
-#### Whom will useful this plugin to
-The plugin very useful for companies (such as Bosch, Biir, Siemens) and blogs who have different web-sites for not logged in visitors from different countries.
+The plugin very useful for companies (such as Alfa Romeo, Bosch, Biir, Siemens) and blogs who have different web-sites for not logged in visitors from different countries.
+It creates Settings page named Country Redirect in the WordPress's admin section where it is possible to point redirect for any country in the world. And when unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the WordPress default `302` status.
+The aim of plugin is reliable country recognition of both desktop and mobile visitors using three independent determining engines based on visitor's IP.
+The using of plugin is pretty simple and does not require of any special or programming skills.
 
-#### What is plugin exactly do
-The plugin creates Settings page Country Redirect in the WordPress's admin section where it is possible to point redirect for any country in the world.
-
-When unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the WordPress default `302` status.
-
-#### Has the country determination reliable
-Both desktop and mobile visitors should be determined correctly using four determining engine based on visitor's IP.
-
-#### Does it need special skills for using
-The using of plugin does not require of any special or programming skills.
-
-#### If you need something special
-Everybody who wants to improve the plugin or to suggest some features are welcome.
+If you have any suggestions or need some special function, please let me know.
 
 == Installation ==
 
-1. Upload the plugin to the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
+1. Upload the plugin into the `/wp-content/plugins/` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. Use the Settings->Country Redirect to configure the plugin
 
 == Frequently Asked Questions ==
 
 = Whom will useful this plugin to =
-The plugin very useful for companies (such as Bosch, Biir, Siemens) and blogs who have different web-sites for not logged in visitors from different countries.
+The plugin very useful for companies (such as Alfa Romeo, Bosch, Biir, Siemens) and blogs who have different web-sites for not logged in visitors from different countries.
 
 = What is plugin exactly do =
-The plugin creates Settings page Country Redirect in the WordPress's admin section where it is possible to point redirect for any country in the world.
+The plugin creates Settings page named Country Redirect in the WordPress's admin section where it is possible to point redirect for any country in the world.
 
 When unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the WordPress default `302` status.
 
 = Has the country determination reliable =
-Both desktop and mobile visitors should be determined correctly using four determining engine based on visitor's IP.
+Both desktop and mobile visitors should be determined correctly using three independent determining engines based on visitor's IP.
+
+= Does the plugin uses any 3rd party service
+Yes. The plugin uses three independent 3rd party services for determine visitor's country by IP:
+First service is "Sypex Geo". It's free for using both commercial and non commercial purposes. More at https://sypexgeo.net/ru/faq/
+Second service is "GeoLite2 Free". It's distributed under the Creative Commons Attribution-ShareAlike 4.0 International License. More at https://dev.maxmind.com/geoip/geoip2/geolite2/. This product includes GeoLite2 data created by MaxMind, available from <a href="https://www.maxmind.com">https://www.maxmind.com</a>.
+Third service is "ip-api". This is online service and it's free for non commercial using only. By default, it switched off when plugin activated. More at https://ip-api.com/
 
 = Does it need special skills for using =
 The using of plugin does not require of any special or programming skills.
@@ -55,8 +51,8 @@ The using of plugin does not require of any special or programming skills.
 Everybody who wants to improve the plugin or to suggest some features are welcome.
 
 == Screenshots ==
-1.
-2.
+1. The screenshot shows country recognition engine settings. You can see at the screenshot, that by default, remote ip-api service is turned off, but if you use the plugin for non commercial purposes you can turn it on. More information at https://ip-api.com/
+2. The screenshot shows redirection settings
 
 == Changelog ==
 

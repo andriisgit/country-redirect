@@ -1,10 +1,10 @@
 <?php
 /* ------------------------------------------------------------------------ *
- * Determining country library for Country Redirect using local SxGeo
+ * Determining country library for Country Redirect using local Sypex Geo
  * ------------------------------------------------------------------------ */
 
 /**
- * @param $ip IPv4
+ * @param string $ip IPv4
  *
  * @return string || false Returns two symbols country code
  */
@@ -14,10 +14,13 @@ function sxgeo( $ip ) {
 
 	if ( file_exists( $path . '.php' ) && file_exists( $path . '.dat' ) ) {
 		include_once( $path . '.php' );
-		$SxGeo   = new SxGeo( $path . '.dat' );
-		$country = $SxGeo->getCountry( $ip );
-
-		if ( in_country_code( $country ) ) {
+		try {
+			$SxGeo   = new SxGeo( $path . '.dat' );
+			$country = $SxGeo->getCountry( $ip );
+		} catch ( Exception $e ) {
+			return false;
+		}
+		if ( $country && in_country_code( $country ) ) {
 			return $country;
 		}
 	}
