@@ -5,28 +5,31 @@
  * <a href="https://www.maxmind.com">https://www.maxmind.com</a>.
  * ------------------------------------------------------------------------ */
 
-require_once plugin_dir_path( dirname( __FILE__ ) ) . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
+$autoload = plugin_dir_path( dirname( __FILE__ ) ) . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
-use GeoIp2\Database\Reader;
+if ( ! file_exists( $autoload ) ) {
+	return false;
+}
+require_once $autoload;
 
 /**
  * @param string $ip IPv4
  *
  * @return string || false Returns two symbols country code
  */
-function geoip2( $ip ) {
+function cntrd_geoip2( $ip ) {
 	$dbfile = plugin_dir_path( dirname( __FILE__ ) ) . 'DB' . DIRECTORY_SEPARATOR . 'GeoIP' . DIRECTORY_SEPARATOR . 'GeoLite2-Country.mmdb';
 
-	if ( file_exists( $dbfile ) ) {
+	if ( defined( 'ABSPATH' ) && file_exists( $dbfile ) ) {
 
 		try {
-			$reader = new Reader( $dbfile );
+			$reader = new GeoIp2\Database\Reader( $dbfile );
 			$record = $reader->country( $ip );
 			$country = $record->country->isoCode;
 		} catch ( Exception $e ) {
 			return false;
 		}
-		if ( $country && in_country_code( $country ) ) {
+		if ( $country && cntrd_in_country_code( $country ) ) {
 			return $country;
 		}
 	}

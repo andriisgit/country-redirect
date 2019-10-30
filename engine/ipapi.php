@@ -4,12 +4,13 @@
  * free for non commercial using remote ip-api service
  * ------------------------------------------------------------------------ */
 
+
 /**
  * @param string $ip IPv4
  *
  * @return string || false Returns two symbols country code
  */
-function ipapi( $ip ) {
+function cntrd_ipapi( $ip ) {
 	if ( ! defined( 'ABSPATH' ) ) {
 		return false;
 	}
@@ -21,7 +22,7 @@ function ipapi( $ip ) {
 
 	if ( $data && $data->status != 'fail' && json_last_error() == JSON_ERROR_NONE ) {
 		$country = $data->countryCode;
-		if ( in_country_code( $country ) ) {
+		if ( cntrd_in_country_code( $country ) ) {
 			return $country;
 		}
 	}

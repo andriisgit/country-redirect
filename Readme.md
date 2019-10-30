@@ -12,6 +12,8 @@ The plugin creates Settings page named Country Redirect in the WordPress's admin
 
 When unauthorized visitor visits the frontend site, this visit will be redirected to URL matched the country he visits from with the WordPress default `302` status.
 
+This plugin does not store any data.
+
 #### Has the country determination reliable
 Both desktop and mobile visitors should be determined correctly using three independent determining engines based on visitor's IP.
 
