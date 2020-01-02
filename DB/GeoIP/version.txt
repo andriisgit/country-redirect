@@ -1,2 +1,2 @@
 https://dev.maxmind.com/geoip/geoip2/geolite2/
-2019.10.22
+2019-12-31

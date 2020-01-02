@@ -58,8 +58,20 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 
 == Changelog ==
 
+= 1.1 =
+* Add whitelist IPs for Alexa, Bing, DuckDuck, Google, Yandex
+* Update databases
+
 = 1.0 =
-The first release of the plugin
+* The first release of the plugin
+
+== Upgrade Notice ==
+
+= 1.1 =
+Add whitelist IPs for Alexa, Bing, DuckDuck, Google, Yandex. Update databases.
+
+= 1.0 =
+The first release of the plugin.
 
 == Translations ==
 * English - default

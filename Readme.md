@@ -16,6 +16,7 @@ This plugin does not store any data.
 
 #### Has the country determination reliable
 Both desktop and mobile visitors should be determined correctly using three independent determining engines based on visitor's IP.
+Also added the whitelist IPs for Alexa, Bing, DuckDuck, Google, Yandex.
 
 #### 3rd party services used in the plugin
 The plugin uses three independent 3rd party services for determine visitor's country by IP:
