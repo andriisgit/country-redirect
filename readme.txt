@@ -3,7 +3,7 @@ Contributors: web8moon
 Tags: redirect, country, ip, geo, redirect by country, redirect by geo, redirect by ip
 Requires at least: 4.7
 Tested up to: 5.2.4
-Stable tag: 1.1
+Stable tag: 1.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -58,6 +58,11 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 
 == Changelog ==
 
+= 1.2 =
+* Add whitelist IPs for Yandex bot and loading speed services
+* Bug fixes
+* Performance improvement
+
 = 1.1 =
 * Add whitelist IPs for Alexa, Bing, DuckDuck, Google, Yandex
 * Update databases
@@ -66,6 +71,9 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 * The first release of the plugin
 
 == Upgrade Notice ==
+
+= 1.2 =
+Add whitelist IPs for Yandex bot and loading speed services. Bug fixes. Performance improvement.
 
 = 1.1 =
 Add whitelist IPs for Alexa, Bing, DuckDuck, Google, Yandex. Update databases.
