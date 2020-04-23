@@ -1,98 +1,149 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: grl10n\n"
-"POT-Creation-Date: 2019-10-29 18:34+0200\n"
-"PO-Revision-Date: 2019-10-29 18:53+0200\n"
+"POT-Creation-Date: 2020-04-23 15:24+0300\n"
+"PO-Revision-Date: 2020-04-23 15:25+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: uk_UA\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: vendor\n"
 "X-Poedit-SearchPathExcluded-1: DB\n"
 
-#: country-redirect.php:53
+#: country-redirect.php:42
 msgid "activated"
 msgstr "активовано"
 
-#: country-redirect.php:54
+#: country-redirect.php:43
 msgid "You can set redirection"
 msgstr "Щоб настроїти перенаправлення, перейдіть"
 
-#: country-redirect.php:54 country-redirect.php:99
+#: country-redirect.php:43 country-redirect.php:78
 msgid "Settings"
 msgstr "Налаштування"
 
-#: country-redirect.php:110 country-redirect.php:159
+#: country-redirect.php:89 country-redirect.php:144
 msgid "Engine Settings"
 msgstr "Налаштування визначення"
 
-#: country-redirect.php:112 country-redirect.php:166
+#: country-redirect.php:91 country-redirect.php:151
 msgid "Redirect Settings"
 msgstr "Налаштування перенаправлення"
 
-#: country-redirect.php:143
-msgid ""
-"Check to use the local \"Sypex Geo\" database for determining visitor's country. It's free for using both commercial and non "
-"commercial purposes"
-msgstr ""
-"Позначте щоб використовувати локальну базу даних \"Sypex Geo\" для визначення країни відвідувача. Вона безкоштовна для "
-"комерційного та некомерційного використання"
+#: country-redirect.php:93 country-redirect.php:158
+msgid "Whitelist Settings"
+msgstr "Налаштування вийнятків"
 
-#: country-redirect.php:148
+#: country-redirect.php:128
 msgid ""
-"Check to use the local \"GeoLite2 Free\" database for determining visitor's country. Database is distributed under the "
-"Creative Commons Attribution-ShareAlike 4.0 International License. More information can be found at"
+"Check to use the local \"Sypex Geo\" database for determining visitor's "
+"country. It's free for using both commercial and non commercial purposes"
 msgstr ""
-"Позначте щоб використовувати локальну базу даних \"GeoLite2 Free\" для визначення країни відвідувача. База даних "
-"розповсюджується під Creative Commons Attribution-ShareAlike 4.0 International License. Більше інформаціі за посиланням"
+"Позначте щоб використовувати локальну базу даних \"Sypex Geo\" для "
+"визначення країни відвідувача. Вона безкоштовна для комерційного та "
+"некомерційного використання"
 
-#: country-redirect.php:153
+#: country-redirect.php:133
 msgid ""
-"Check to use free for non commercial use \"ip-api\" engine for determining visitor's country. Get more information and obtain "
-"commercial license"
+"Check to use the local \"GeoLite2 Free\" database for determining visitor's "
+"country. Database is distributed under the Creative Commons Attribution-"
+"ShareAlike 4.0 International License. More information can be found at"
 msgstr ""
-"Позначте щоб використовувати безкоштовний для некомерційного використання \"ip-api\" для визначення країни відвідувача. "
-"Отримати більше інформації та придбати ліцензію"
+"Позначте щоб використовувати локальну базу даних \"GeoLite2 Free\" для "
+"визначення країни відвідувача. База даних розповсюджується під Creative "
+"Commons Attribution-ShareAlike 4.0 International License. Більше інформаціі "
+"за посиланням"
+
+#: country-redirect.php:138
+msgid ""
+"Check to use free for non commercial use \"ip-api\" engine for determining "
+"visitor's country. Get more information and obtain commercial license"
+msgstr ""
+"Позначте щоб використовувати безкоштовний для некомерційного використання "
+"\"ip-api\" для визначення країни відвідувача. Отримати більше інформації та "
+"придбати ліцензію"
+
+#: country-redirect.php:194
+msgid "Select DB and/or API you want to use to determine visitor's country"
+msgstr ""
+"Оберіть базу визначень та/або API які Ви бажаєте використовувати для "
+"визначення країни відвідувача"
 
 #: country-redirect.php:195
-msgid "Select DB and/or API you want to use to determine visitor's country"
-msgstr "Оберіть базу визначень та/або API які Ви бажаєте використовувати для визначення країни відвідувача"
+msgid ""
+"If no determine engine will be selected below, all Redirect Settings will be "
+"skipped"
+msgstr ""
+"Якщо жодного визначення на цій сторінці не вибрано, всі налаштування "
+"перенаправлення будуть ігноровані"
 
-#: country-redirect.php:196
-msgid "If no determine engine will be selected below, all Redirect Settings will be skipped"
-msgstr "Якщо жодного визначення на цій сторінці не вибрано, всі налаштування перенаправлення будуть ігноровані"
+#: country-redirect.php:199
+msgid ""
+"Assign desired redirection to country code. Just enter the full URL into "
+"textbox"
+msgstr ""
+"Співставте бажане перенаправлення з кодом країни. Ведіть повний URL в "
+"відповідне тектсове поле"
 
 #: country-redirect.php:200
-msgid "Assign desired redirection to country code. Just enter the full URL into textbox"
-msgstr "Співставте бажане перенаправлення з кодом країни. Ведіть повний URL в відповідне тектсове поле"
-
-#: country-redirect.php:201
 msgid "To see complete list of codes, check Wikipedia page"
-msgstr "Щоб дізнатися перелік кодів країн, відвідайте трорінку Wikipedia"
+msgstr "Щоб дізнатися перелік кодів країн, відвідайте строрінку Wikipedia"
 
-#: country-redirect.php:230
+#: country-redirect.php:206
+msgid "Specify the IPs (IPv4) for which the redirect will NOT be applied"
+msgstr ""
+"Перелічіть IP (у форматі IPv4) для яких перенаправлення не буде "
+"застосовуватись"
+
+#: country-redirect.php:207
+msgid "You can add one IP per line or use \";\" or \",\" as a delimiter"
+msgstr ""
+"Можна писати кожний IP на окремому рядку, або розділяти їх \";\" або \",\""
+
+#: country-redirect.php:261
 msgid "Put here redirection URL for "
 msgstr "Введіть URL перенаправлення для "
 
-#. Description of the plugin
-msgid "Simple to use free and safety plugin for redirection depending visitor's country"
-msgstr "Простий у використанні вільний та безпечний плагін для перенаправлення в залежності від країни з якої зайшов відвідувач"
+#: country-redirect.php:279
+msgid "Check to redirect known bots too"
+msgstr "Позначте, щоб перенаправляти, також, відомих ботів"
+
+#~ msgid "Check to add bots IPs to whitelist for"
+#~ msgstr "Позначте щоб не дозволяти перенаправлення для ботів"
+
+#~ msgid ""
+#~ "Simple to use free and safety plugin for redirection depending visitor's "
+#~ "country"
+#~ msgstr ""
+#~ "Простий у використанні вільний та безпечний плагін для перенаправлення в "
+#~ "залежності від країни з якої зайшов відвідувач"
 
 #~ msgid "Use "
 #~ msgstr "Використовувати "
 
-#~ msgid " library to determine visitor's country. For additional info about the library, check "
-#~ msgstr " бібліотеку для визначення країни відвідувача. Інформацію про бібліотеку можна знайти на "
+#~ msgid ""
+#~ " library to determine visitor's country. For additional info about the "
+#~ "library, check "
+#~ msgstr ""
+#~ " бібліотеку для визначення країни відвідувача. Інформацію про бібліотеку "
+#~ "можна знайти на "
 
-#~ msgid " API to determine visitor's country. For additional info about the API, check "
-#~ msgstr " API для визначення країни відвідувача. Інформацію про API можна знайти на "
+#~ msgid ""
+#~ " API to determine visitor's country. For additional info about the API, "
+#~ "check "
+#~ msgstr ""
+#~ " API для визначення країни відвідувача. Інформацію про API можна знайти "
+#~ "на "
 
 #~ msgid "Simple to use plugin for redirection depending visitor's country"
-#~ msgstr "Простий у використанні плагін для перенаправлення відвідувачів в залежності від країни з якої зайшов відвідувач"
+#~ msgstr ""
+#~ "Простий у використанні плагін для перенаправлення відвідувачів в "
+#~ "залежності від країни з якої зайшов відвідувач"

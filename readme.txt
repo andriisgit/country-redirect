@@ -2,8 +2,8 @@
 Contributors: web8moon
 Tags: redirect, country, ip, geo, redirect by country, redirect by geo, redirect by ip
 Requires at least: 4.7
-Tested up to: 5.2.4
-Stable tag: 1.2
+Tested up to: 5.4
+Stable tag: 1.3.1
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -55,8 +55,18 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 == Screenshots ==
 1. The screenshot shows country recognition engine settings. You can see at the screenshot, that by default, remote ip-api service is turned off, but if you use the plugin for non commercial purposes you can turn it on. More information at https://ip-api.com/
 2. The screenshot shows redirection settings
+3. The screenshot shows whitelist settings
 
 == Changelog ==
+
+= 1.3.1 =
+* Change updating algorithm to avoid using WordPress's action upgrader_process_complete.
+Please, check your bot whitelist settings carefully.
+
+= 1.3 =
+* Add interface tab for whitelist settings
+* Eliminate strict settings for redirect to different domain zones
+* Update local IP databases
 
 = 1.2 =
 * Add whitelist IPs for Yandex bot and loading speed services
@@ -71,6 +81,10 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 * The first release of the plugin
 
 == Upgrade Notice ==
+
+= 1.3 =
+Add whitelist settings. Allow by default redirect to different domain zones. Update databases.
+
 
 = 1.2 =
 Add whitelist IPs for Yandex bot and loading speed services. Bug fixes. Performance improvement.
