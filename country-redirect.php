@@ -19,6 +19,7 @@ register_activation_hook( __FILE__, function () {
 
     cntrd_set_engine_options();
     cntrd_set_whitelist_options();
+    cntrd_set_whitelist_urls();
 
     set_transient( 'cntrd-activation-notice', true, 5 );
 });
@@ -91,6 +92,8 @@ function cntrd_admin_page() {
                class="nav-tab <?php echo $active_tab == 'redirect_options' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Redirect Settings', 'cntrdl10n' ) ?></a>
             <a href="?page=country-redirect-options&tab=whitelist_options"
                class="nav-tab <?php echo $active_tab == 'whitelist_options' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Whitelist Settings', 'cntrdl10n' ) ?></a>
+            <a href="?page=country-redirect-options&tab=whitelist_urls"
+               class="nav-tab <?php echo $active_tab == 'whitelist_urls' ? 'nav-tab-active' : ''; ?>"><?php _e( 'Whitelist URLs', 'cntrdl10n' ) ?></a>
         </h2>
 
         <form method="post" action="options.php">
@@ -106,6 +109,10 @@ function cntrd_admin_page() {
             if ( $active_tab == 'whitelist_options' ) {
                 settings_fields( 'cntrd_whitelist' );
                 do_settings_sections( 'cntrd_whitelist' );
+            }
+            if ( $active_tab == 'whitelist_urls' ) {
+                settings_fields( 'cntrd_whitelist_urls' );
+                do_settings_sections( 'cntrd_whitelist_urls' );
             }
             submit_button(); ?>
         </form>
@@ -152,12 +159,19 @@ function cntrd_initialize_options() {
         'cntrd_redirect_settings_callback',
         'redirect'
     );
-    
+
     add_settings_section(
         'cntrd_whitelist_settings',
         __( 'Whitelist Settings', 'cntrdl10n' ),
         'cntrd_whitelist_settings_callback',
         'cntrd_whitelist'
+    );
+
+    add_settings_section(
+        'cntrd_whitelist_urls',
+        __( 'Whitelist URLs', 'cntrdl10n' ),
+        'cntrd_whitelist_urls_callback',
+        'cntrd_whitelist_urls'
     );
 
     foreach ( $engine_settings as $setting ) {
@@ -174,13 +188,15 @@ function cntrd_initialize_options() {
             register_setting( 'redirect', 'cntrd_redirect_' . $code, [ 'sanitize_callback' => 'cntrd_validate_url' ] );
         }
     }
-    
+
     add_settings_field('cntrd_whitelist_ip', 'IP whitelist ', 'cntrd_toggle_whitelist_ip', 'cntrd_whitelist', 'cntrd_whitelist_settings', ['cntrd_whitelist_ip']);
     register_setting('cntrd_whitelist', 'cntrd_whitelist_ip', [ 'sanitize_callback' => 'cntrd_sanitize_whitelist' ]);
 
     add_settings_field('cntrd_whitelist_bot', 'Bot whitelist ', 'cntrd_toggle_whitelist_bot', 'cntrd_whitelist', 'cntrd_whitelist_settings', ['cntrd_whitelist_bot']);
     register_setting('cntrd_whitelist', 'cntrd_whitelist_bot');
 
+    add_settings_field('cntrd_whitelist_urls', 'URLs to whitelist ', 'cntrd_toggle_whitelist_urls', 'cntrd_whitelist_urls', 'cntrd_whitelist_urls', ['cntrd_whitelist_urls']);
+    register_setting('cntrd_whitelist_urls', 'cntrd_whitelist_urls', [ 'sanitize_callback' => 'cntrd_sanitize_whitelist_urls' ]);
 }
 
 add_action( 'admin_init', 'cntrd_initialize_options' );
@@ -207,6 +223,13 @@ function cntrd_whitelist_settings_callback() {
     echo '<p>' . __( 'You can add one IP per line or use ";" or "," as a delimiter', 'cntrdl10n' ) . '.</p>';
 
     cntrd_set_whitelist_options();
+}
+
+function cntrd_whitelist_urls_callback() {
+    echo '<p>' . __( 'Specify the URLS for which the redirect will NOT be applied', 'cntrdl10n' ) . '.</p>';
+    echo '<p>' . __( 'You can add one URL per line or use ";" or "," as a delimiter', 'cntrdl10n' ) . '.</p>';
+
+    cntrd_set_whitelist_urls();
 }
 
 
@@ -239,6 +262,24 @@ function cntrd_sanitize_whitelist( $input ) {
     return apply_filters( 'cntrd_sanitize_whitelist', $output, $input );
 }
 
+function cntrd_sanitize_whitelist_urls( $input ) {
+    $output = esc_textarea( $input );
+    $output = str_replace("\r\n", ';', $output);
+    $output = str_replace("\n", ';', $output);
+    $output = str_replace("\r", ';', $output);
+    $output = str_replace(',', ';', $output);
+    $output = str_replace(' ', ';', $output);
+    $tmp = explode(';', $output);
+    $array = [];
+    foreach ($tmp as $adr) {
+        if (trim($adr) != '') {
+            array_push($array, trim($adr));
+        }
+    }
+    $output = json_encode($array);
+
+    return apply_filters( 'cntrd_sanitize_whitelist', $output, $input );
+}
 
 /* ------------------------------------------------------------------------ *
  * Field Callbacks
@@ -283,6 +324,18 @@ function cntrd_toggle_whitelist_bot( $args ) {
     echo $html;
 }
 
+function cntrd_toggle_whitelist_urls( $args ) {
+    $whitelist_urls = get_option( $args[0], '' );
+    if ($whitelist_urls != '') {
+        $array = json_decode($whitelist_urls);
+        $array = array_values($array);
+        $whitelist_urls = implode(PHP_EOL, $array);
+    }
+    $html = '<textarea id="' . $args[0] . '" name="' . $args[0] . '" autocomplete="off" rows="5" cols="30">';
+    $html .= $whitelist_urls . '</textarea>';
+    echo $html;
+}
+
 /* ------------------------------------------------------------------------ *
  * Redirect
  * ------------------------------------------------------------------------ */
@@ -302,6 +355,20 @@ add_action( 'template_redirect', function () {
     if ( $whitelist = get_option('cntrd_whitelist_ip') ) {
         $whitelist = json_decode($whitelist);
         if ( in_array($ip, $whitelist) ) {
+            return;
+        }
+    }
+
+    $path = $_SERVER['REQUEST_URI'];
+    // remove training slash if any
+    if (substr($path, -1) == '/')
+        $path = substr($path,  0,strlen($path)-1);
+
+    // Check if the URL is in whitelist range
+    if ( $whitelist_urls = get_option('cntrd_whitelist_urls') ) {
+        $whitelist_urls = json_decode($whitelist_urls);
+        $patterns_flattened = implode('|', $whitelist_urls);
+        if ( preg_match('/' . $patterns_flattened . '/', $path) ) {
             return;
         }
     }
@@ -688,7 +755,7 @@ function cntrd_is_bot( $ip ) {
         '54.243.7.98',
         '23.23.71.32',
         '54.234.136.196',
-		
+
         //mediaskunk.ru - Web Meta Info
         '87.242.64.151',
 
@@ -764,6 +831,15 @@ function cntrd_set_whitelist_options() {
 
     if ( !get_option( 'cntrd_whitelist_bot' ) ) {
         add_option( 'cntrd_whitelist_bot', 0, '', 'no' );
+    }
+}
+
+/**
+ * Activate and initial setup whitelist url plugin's settings
+ */
+function cntrd_set_whitelist_urls() {
+    if ( !get_option( 'cntrd_whitelist_urls' ) ) {
+        add_option( 'cntrd_whitelist_urls', '', '', 'no' );
     }
 }
 
