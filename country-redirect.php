@@ -3,7 +3,7 @@
 Plugin Name: country-redirect
 Plugin URI: https://wordpress.org/plugins/country-redirect/
 Description: Simple to use free and safety plugin for redirection depending visitor's country
-Version: 1.3.1
+Version: 1.3.2
 Text Domain: cntrdl10n
 Domain Path: /lang/
 */
@@ -107,7 +107,8 @@ function cntrd_admin_page() {
                 settings_fields( 'cntrd_whitelist' );
                 do_settings_sections( 'cntrd_whitelist' );
             }
-            submit_button(); ?>
+            submit_button();
+            ?>
         </form>
 
     </div><!-- /.wrap -->
@@ -122,21 +123,21 @@ function cntrd_initialize_options() {
     $SxGeo = new CountryRedirect\SxGeo( $path . '.dat' );
 
     $engine_settings = [
-            [
-                'id'    => 'cntrd_engine_sxgeo',
-                'title' => 'Sypex Geo (local)',
-                'label' => __('Check to use the local "Sypex Geo" database for determining visitor\'s country. It\'s free for using both commercial and non commercial purposes', 'cntrdl10n') . ': https://sypexgeo.net/ru/faq/'
-            ],
-            [
-                'id'    => 'cntrd_engine_geoip2',
-                'title' => 'GeoLite2 Free (local)',
-                'label' => __('Check to use the local "GeoLite2 Free" database for determining visitor\'s country. Database is distributed under the Creative Commons Attribution-ShareAlike 4.0 International License. More information can be found at', 'cntrdl10n') . ' https://dev.maxmind.com/geoip/geoip2/geolite2/'
-            ],
-            [
-                'id'    => 'cntrd_engine_ipapi',
-                'title' => 'ip-api (remote)',
-                'label' => __('Check to use free for non commercial use "ip-api" engine for determining visitor\'s country. Get more information and obtain commercial license', 'cntrdl10n') . ': https://ip-api.com/'
-            ]
+        [
+            'id'    => 'cntrd_engine_sxgeo',
+            'title' => 'Sypex Geo (local)',
+            'label' => __('Check to use the local "Sypex Geo" database for determining visitor\'s country. It\'s free for using both commercial and non commercial purposes', 'cntrdl10n') . ': https://sypexgeo.net/ru/faq/'
+        ],
+        [
+            'id'    => 'cntrd_engine_geoip2',
+            'title' => 'GeoLite2 Free (local)',
+            'label' => __('Check to use the local "GeoLite2 Free" database for determining visitor\'s country. Database is distributed under the Creative Commons Attribution-ShareAlike 4.0 International License. More information can be found at', 'cntrdl10n') . ' https://dev.maxmind.com/geoip/geoip2/geolite2/'
+        ],
+        [
+            'id'    => 'cntrd_engine_ipapi',
+            'title' => 'ip-api (remote)',
+            'label' => __('Check to use free for non commercial use "ip-api" engine for determining visitor\'s country. Get more information and obtain commercial license', 'cntrdl10n') . ': https://ip-api.com/'
+        ]
     ];
 
     add_settings_section(

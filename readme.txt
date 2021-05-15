@@ -2,8 +2,8 @@
 Contributors: web8moon
 Tags: redirect, country, ip, geo, redirect by country, redirect by geo, redirect by ip
 Requires at least: 4.7
-Tested up to: 5.4
-Stable tag: 1.3.1
+Tested up to: 5.7.2
+Stable tag: 1.3.2
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -58,6 +58,11 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 3. The screenshot shows whitelist settings
 
 == Changelog ==
+
+= 1.3.2 =
+* Correct SxGeo.php to meet PHP7.4 requirements
+* Update SxGeo database to 2021-04-30
+* Update GeoIP database to 2021-05-11
 
 = 1.3.1 =
 * Change updating algorithm to avoid using WordPress's action upgrader_process_complete.
