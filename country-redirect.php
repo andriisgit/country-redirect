@@ -3,7 +3,7 @@
 Plugin Name: country-redirect
 Plugin URI: https://wordpress.org/plugins/country-redirect/
 Description: Simple to use free and safety plugin for redirection depending visitor's country
-Version: 1.3.2
+Version: 1.3.3
 Text Domain: cntrdl10n
 Domain Path: /lang/
 */
@@ -258,7 +258,7 @@ function cntrd_toggle_redirect( $args ) {
     $option_name = 'cntrd_redirect_' . $args[0];
 
     $html = '<input type="text" id="' . $option_name . '" name="' . $option_name . '" value="';
-    $html.= esc_url( get_option( $option_name, '' ) ) . '" class="regular-text code"/>';
+    $html .= esc_url( get_option( $option_name, '' ) ) . '" class="regular-text code"/>';
     $html .= '<label for="' . $option_name . '"> ' . __( 'Put here redirection URL for ', 'cntrdl10n' ) . $args[0] . '</label>';
 
     echo $html;
@@ -294,8 +294,9 @@ add_action( 'template_redirect', function () {
     }
 
     $ip = $_SERVER['REMOTE_ADDR'];
+    $agent = $_SERVER['HTTP_USER_AGENT'];
 
-    if (get_option('cntrd_whitelist_bot') && cntrd_is_bot($ip)) {
+    if ( !get_option('cntrd_whitelist_bot') && cntrd_is_bot($ip, $agent) ) {
         return;
     }
 
@@ -379,11 +380,16 @@ function cntrd_in_country_code( $country ) {
  * Check for bots
  *
  * @param string $ip IPv4
+ * @param string $agent $_SERVER['HTTP_USER_AGENT']
  *
  * @return bool
  */
-function cntrd_is_bot( $ip ) {
+function cntrd_is_bot( $ip, $agent ) {
 
+    if ( preg_match('/archiver|bot|crawl|slurp|spider|mediapartners/i', $agent) == 1 ) {
+        return true;
+    }
+	
     if ( count(explode('.', $ip)) != 4 ) {
         return false;
     }

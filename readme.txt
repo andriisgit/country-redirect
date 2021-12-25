@@ -2,8 +2,8 @@
 Contributors: web8moon
 Tags: redirect, country, ip, geo, redirect by country, redirect by geo, redirect by ip
 Requires at least: 4.7
-Tested up to: 5.7.2
-Stable tag: 1.3.2
+Tested up to: 5.8.2
+Stable tag: 1.3.3
 Requires PHP: 7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -59,6 +59,11 @@ Everybody who wants to improve the plugin or to suggest some features are welcom
 
 == Changelog ==
 
+= 1.3.3 =
+* add bot recognition by User Agent substring
+* Update SxGeo database to 2021-12-19
+* Update GeoIP database to 2021-12-21
+
 = 1.3.2 =
 * Correct SxGeo.php to meet PHP7.4 requirements
 * Update SxGeo database to 2021-04-30
@@ -89,7 +94,6 @@ Please, check your bot whitelist settings carefully.
 
 = 1.3 =
 Add whitelist settings. Allow by default redirect to different domain zones. Update databases.
-
 
 = 1.2 =
 Add whitelist IPs for Yandex bot and loading speed services. Bug fixes. Performance improvement.
